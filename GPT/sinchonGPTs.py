@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-import main
+# import main
+import ragMain
 import secret
  
 TOKEN = secret.TOKEN
@@ -16,13 +17,13 @@ bot = commands.Bot(command_prefix='*', intents=intents)
 async def on_ready():
     channel = bot.get_channel(CHANNEL_ID)
     if channel:  # 채널이 존재하는지 확인
-        await channel.send('안녕하세요.\n **🤖임시 개장 GPT 상담소🤖** 입니다.\n"상담해줘"를 메세지에 포함시켜서 상담 신청 부탁드립니다!')
+        await channel.send('안녕하세요.\n **🤖임시 개장 신촌 정보 GPT 🤖** 입니다.\n"알려줘"를 메세지에 포함시켜서 icpc 신촌 정보 검색 부탁드립니다!')
 
 
 # 테스트
 @bot.command()
 async def TODO(ctx):
-    await ctx.send('- 신촌 관련 문서 학습시키기(RAG) \n- 카카오톡 api 연결하기\n- 서버 올리기')
+    await ctx.send('- 신촌 관련 문서 학습시키기(RAG) ✅  \n- 카카오톡 api 연결하기\n- 서버 올리기')
 
 @bot.event
 async def on_message(message):
@@ -32,12 +33,12 @@ async def on_message(message):
 
     # 사용자가 보낸 메시지 내용 출력
     # print(f'Message from {message.author}: {message.content}')
-    server_nickname = message.author.nick if message.author.nick else message.author.name
+    #server_nickname = message.author.nick if message.author.nick else message.author.name
     
     # 간단한 응답 보내기
-    if ('상담해줘') in message.content:
-        print(server_nickname) #
-        AImessage = main.invoke_chain( server_nickname ,message.content) # 질문 gpt 전송
+    if ('알려줘') in message.content:
+        #print(server_nickname) #
+        AImessage = ragMain.invoke_chain(message.content) # 질문 gpt 전송
         await message.channel.send(AImessage)
 
     # 이 코드는 커스텀 커맨드도 정상적으로 작동하게 함

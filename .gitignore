@@ -164,3 +164,8 @@ GPT/env/
 *.env
 
 GPT/secret.py
+
+env/
+.env
+files/
+.cache/
